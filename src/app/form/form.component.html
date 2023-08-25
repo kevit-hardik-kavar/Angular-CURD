@@ -1,0 +1,122 @@
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  "
+  *ngIf="loading"
+>
+  <mat-progress-spinner
+    class="example-margin"
+    color="blue"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
+  </div>  
+  <div *ngIf="!loading">
+    <h3 style="margin: 50px 50px 10px; text-align: center">Fill this form</h3>
+    <div class="form-group">
+      <form (ngSubmit)="onPost()" [formGroup]="employeeData">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            name="username"
+            [formControlName]="'username'"
+            class="form-control"
+            aria-describedby="emailHelp"
+            id="username"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              employeeData.controls['username'].invalid &&
+              employeeData.controls['username'].touched
+            "
+            >username is required</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            [formControlName]="'email'"
+            id="email"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              employeeData.controls['email'].invalid &&
+              employeeData.controls['email'].touched
+            "
+            >email is required</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="mobile" class="form-label">Mobile No.</label>
+          <input
+            type="tel"
+            name="mobile"
+            class="form-control"
+            id="mobile"
+            [formControlName]="'mobile'"
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              employeeData.controls['mobile'].invalid &&
+              employeeData.controls['mobile'].touched
+            "
+            >Mobile is required</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="position" class="mb-2">Position</label>
+          <select
+            class="form-select mb-2"
+            aria-label="Default select example"
+            [formControlName]="'select'"
+            name="select"
+          >
+            <option value="intern">Intern</option>
+            <option value="level1">L1</option>
+            <option value="level2">L2</option>
+            <option value="level3">L3</option>
+            <option value="team lead">Team lead</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="adress" class="form-label">Adress</label>
+          <textarea
+            class="form-control"
+            id="adress"
+            name="address"
+            [formControlName]="'address'"
+            rows="3"
+          ></textarea>
+          <small
+            class="text-danger"
+            *ngIf="
+              employeeData.controls['address'].invalid &&
+              employeeData.controls['address'].touched
+            "
+            >Address is required</small
+          >
+        </div>
+        <button class="btn btn-primary">
+          {{ this.queryParams.action == "edit" ? "Update" : "Submit" }}
+        </button>
+        <button
+          class="btn btn-secondary mx-2"
+          type="button"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
